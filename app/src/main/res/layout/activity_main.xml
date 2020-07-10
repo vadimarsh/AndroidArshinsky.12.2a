@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageBackG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/simpleCalcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:padding="0dp"
+            android:text="@string/_0"
+            android:textAlignment="textEnd"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:id="@+id/butpan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textview"
+
+            android:layout_toStartOf="@+id/oppan"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+
+            <LinearLayout
+                android:id="@+id/spespan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <include
+                    android:id="@+id/buttonreset"
+                    layout="@layout/button_d"
+                    android:text="@string/_reset" />
+
+                <include
+                    android:id="@+id/buttonsign"
+                    layout="@layout/button_d"
+                    android:text="@string/_sign" />
+
+                <include
+                    android:id="@+id/buttonproc"
+                    layout="@layout/button_d"
+                    android:text="@string/_proc" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <include
+                    android:id="@+id/button7"
+                    layout="@layout/button_d"
+                    android:text="@string/_7" />
+
+                <include
+                    android:id="@+id/button8"
+                    layout="@layout/button_d"
+                    android:text="@string/_8" />
+
+                <include
+                    android:id="@+id/button9"
+                    layout="@layout/button_d"
+                    android:text="@string/_9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/button4"
+                    layout="@layout/button_d"
+                    android:text="@string/_4" />
+
+                <include
+                    android:id="@+id/button5"
+                    layout="@layout/button_d"
+                    android:text="@string/_5" />
+
+                <include
+                    android:id="@+id/button6"
+                    layout="@layout/button_d"
+                    android:text="@string/_6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/button1"
+                    layout="@layout/button_d"
+                    android:text="@string/_1" />
+
+                <include
+                    android:id="@+id/button2"
+                    layout="@layout/button_d"
+                    android:text="@string/_2" />
+
+                <include
+                    android:id="@+id/button3"
+                    layout="@layout/button_d"
+                    android:text="@string/_3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <include
+                    android:id="@+id/buttonMode"
+                    layout="@layout/button_d"
+                    android:text="@string/_mode" />
+
+                <include
+                    android:id="@+id/button0"
+                    layout="@layout/button_d"
+                    android:text="@string/_0" />
+
+                <include
+                    android:id="@+id/buttonDot"
+                    layout="@layout/button_d"
+                    android:text="@string/_dot" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/oppan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/buttondiv"
+                layout="@layout/button_d"
+                android:text="@string/_div" />
+
+            <include
+                android:id="@+id/buttonmult"
+                layout="@layout/button_d"
+                android:text="@string/_mult" />
+
+            <include
+                android:id="@+id/buttonminus"
+                layout="@layout/button_d"
+                android:text="@string/_minus" />
+
+            <include
+                android:id="@+id/buttonplus"
+                layout="@layout/button_d"
+                android:text="@string/_plus" />
+
+            <include
+                android:id="@+id/buttoneval"
+                layout="@layout/button_d"
+                android:text="@string/_eval" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/engCalcLayout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/engtextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:padding="0dp"
+            android:text="@string/_0"
+            android:textAlignment="textEnd"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:id="@+id/engfunctpan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/engtextview"
+            android:layout_alignParentStart="true"
+
+            android:orientation="horizontal">
+
+
+            <include
+                android:id="@+id/buttonexp"
+                layout="@layout/button_d"
+                android:text="@string/_exp" />
+
+            <include
+                android:id="@+id/buttonlog"
+                layout="@layout/button_d"
+                android:text="@string/_log" />
+
+            <include
+                android:id="@+id/buttonln"
+                layout="@layout/button_d"
+                android:text="@string/_ln" />
+
+            <include
+                android:id="@+id/buttonpow"
+                layout="@layout/button_d"
+                android:text="@string/_pow" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/engspespan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/engfunctpan"
+            android:layout_alignParentStart="true"
+
+            android:orientation="horizontal">
+
+
+            <include
+                android:id="@+id/engbuttonreset"
+                layout="@layout/button_d"
+                android:text="@string/_reset" />
+
+            <include
+                android:id="@+id/engbuttonsign"
+                layout="@layout/button_d"
+                android:text="@string/_sign" />
+
+            <include
+                android:id="@+id/engbuttonproc"
+                layout="@layout/button_d"
+                android:text="@string/_proc" />
+
+            <include
+                android:id="@+id/engbuttondiv"
+                layout="@layout/button_d"
+                android:text="@string/_div" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/engbutpan"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/engspespan"
+
+
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <include
+                    android:id="@+id/engbutton7"
+                    layout="@layout/button_d"
+                    android:text="@string/_7" />
+
+                <include
+                    android:id="@+id/engbutton8"
+                    layout="@layout/button_d"
+                    android:text="@string/_8" />
+
+                <include
+                    android:id="@+id/engbutton9"
+                    layout="@layout/button_d"
+                    android:text="@string/_9" />
+
+                <include
+                    android:id="@+id/engbuttonmult"
+                    layout="@layout/button_d"
+                    android:text="@string/_mult" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/engbutton4"
+                    layout="@layout/button_d"
+                    android:text="@string/_4" />
+
+                <include
+                    android:id="@+id/engbutton5"
+                    layout="@layout/button_d"
+                    android:text="@string/_5" />
+
+                <include
+                    android:id="@+id/engbutton6"
+                    layout="@layout/button_d"
+                    android:text="@string/_6" />
+
+                <include
+                    android:id="@+id/engbuttonminus"
+                    layout="@layout/button_d"
+                    android:text="@string/_minus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/engbutton1"
+                    layout="@layout/button_d"
+                    android:text="@string/_1" />
+
+                <include
+                    android:id="@+id/engbutton2"
+                    layout="@layout/button_d"
+                    android:text="@string/_2" />
+
+                <include
+                    android:id="@+id/engbutton3"
+                    layout="@layout/button_d"
+                    android:text="@string/_3" />
+
+                <include
+                    android:id="@+id/engbuttonplus"
+                    layout="@layout/button_d"
+                    android:text="@string/_plus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <include
+                    android:id="@+id/engbuttonMode"
+                    layout="@layout/button_d"
+                    android:text="@string/_mode" />
+
+                <include
+                    android:id="@+id/engbutton0"
+                    layout="@layout/button_d"
+                    android:text="@string/_0" />
+
+                <include
+                    android:id="@+id/engbuttonDot"
+                    layout="@layout/button_d"
+                    android:text="@string/_dot" />
+
+                <include
+                    android:id="@+id/engbuttoneval"
+                    layout="@layout/button_d"
+                    android:text="@string/_eval" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/buttonSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/engbutpan"
+            android:text="Открыть настройки" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
