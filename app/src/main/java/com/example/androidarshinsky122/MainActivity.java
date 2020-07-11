@@ -1,6 +1,9 @@
 package com.example.androidarshinsky122;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,12 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static final int REQUEST_CODE_PERMISSION_READ_STORAGE = 10;
+    private static String SAVEDDATA = "img_fname";
+    private String filename = "";
     private View engLayout;
     private View basLayout;
     private Button[] buttonsBas = new Button[11];
@@ -32,16 +40,51 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSettings;
     private TextView textViewBas;
     private TextView textViewEng;
+    private ImageView backGround;
+    private SharedPreferences mySharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        readDataFromShPrefs();
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        readDataFromShPrefs();
+    }
+
+    private void readDataFromShPrefs() {
+        filename = mySharedPref.getString(SAVEDDATA, "");
+        if (filename.length() > 0) {
+            int permissionStatus = ContextCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE);
+
+            if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
+                if (LoadImg()) {
+
+                } else {
+                    backGround.setImageDrawable(null);
+                    Toast.makeText(MainActivity.this, "File not exist", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_PERMISSION_READ_STORAGE);
+            }
+        }
+    }
+
     private void init() {
+        mySharedPref = getSharedPreferences("Settings", MODE_PRIVATE);
+
+        backGround = findViewById(R.id.imageBackG);
+
+
         buttonSettings = findViewById(R.id.buttonSettings);
 
         buttonSettings.setOnClickListener(new View.OnClickListener() {
@@ -197,5 +240,55 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             changeVisibility();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSION_READ_STORAGE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (LoadImg()) {
+
+                    } else {
+                        backGround.setImageDrawable(null);
+                        Toast.makeText(this, "File not exist", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Permission error", Toast.LENGTH_LONG).show();
+                }
+                return;
+        }
+    }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean LoadImg() {
+
+        if (isExternalStorageWritable()) {
+
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    filename);
+
+            if (file.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                backGround.setImageBitmap(bitmap);
+                Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            } else {
+                return false;
+            }
+        } else {
+            Toast.makeText(this, "File Error", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }
