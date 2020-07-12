@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int REQUEST_CODE_PERMISSION_READ_STORAGE = 10;
+    //public static final int REQUEST_CODE_PERMISSION_READ_STORAGE = 10;
     private static String SAVEDDATA = "img_fname";
     private String filename = "";
     private View engLayout;
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         readDataFromShPrefs();
-
     }
 
     @Override
@@ -61,21 +60,17 @@ public class MainActivity extends AppCompatActivity {
     private void readDataFromShPrefs() {
         filename = mySharedPref.getString(SAVEDDATA, "");
         if (filename.length() > 0) {
-            int permissionStatus = ContextCompat.checkSelfPermission(MainActivity.this,
+            loadImg();
+            /*int permissionStatus = ContextCompat.checkSelfPermission(MainActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE);
 
             if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
-                if (LoadImg()) {
-
-                } else {
-                    backGround.setImageDrawable(null);
-                    Toast.makeText(MainActivity.this, "File not exist", Toast.LENGTH_LONG).show();
-                }
+                loadImg();
             } else {
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_PERMISSION_READ_STORAGE);
-            }
+            }*/
         }
     }
 
@@ -90,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
         engLayout = findViewById(R.id.engCalcLayout);
@@ -234,33 +229,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class ModeClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            changeVisibility();
-        }
-    }
-
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_PERMISSION_READ_STORAGE:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    if (LoadImg()) {
-
-                    } else {
-                        backGround.setImageDrawable(null);
-                        Toast.makeText(this, "File not exist", Toast.LENGTH_LONG).show();
-                    }
+                    loadImg();
                 } else {
                     Toast.makeText(this, "Permission error", Toast.LENGTH_LONG).show();
                 }
                 return;
         }
-    }
+    }*/
 
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
@@ -271,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean LoadImg() {
+    private void loadImg() {
 
         if (isExternalStorageWritable()) {
 
@@ -283,12 +264,19 @@ public class MainActivity extends AppCompatActivity {
                 backGround.setImageBitmap(bitmap);
                 Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_LONG).show();
             } else {
-                return false;
+                backGround.setImageDrawable(null);
+                Toast.makeText(this, "File not exist", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(this, "File Error", Toast.LENGTH_LONG).show();
-            return false;
         }
-        return true;
+    }
+
+    private class ModeClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            changeVisibility();
+        }
     }
 }
