@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-    //public static final int REQUEST_CODE_PERMISSION_READ_STORAGE = 10;
+    public static final int REQUEST_CODE_PERMISSION_READ_STORAGE = 10;
     private static String SAVEDDATA = "img_fname";
     private String filename = "";
     private View engLayout;
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private void readDataFromShPrefs() {
         filename = mySharedPref.getString(SAVEDDATA, "");
         if (filename.length() > 0) {
-            loadImg();
-            /*int permissionStatus = ContextCompat.checkSelfPermission(MainActivity.this,
+
+            int permissionStatus = ContextCompat.checkSelfPermission(MainActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE);
 
             if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_PERMISSION_READ_STORAGE);
-            }*/
+            }
         }
     }
 
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   /* @Override
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_PERMISSION_READ_STORAGE:
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
         }
-    }*/
+    }
 
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
@@ -255,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadImg() {
 
         if (isExternalStorageWritable()) {
-
             File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                     filename);
 
